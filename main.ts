@@ -18,4 +18,11 @@ scene.cameraFollowSprite(plrSprite)
 // Walking
 controller.player1.moveSprite(plrSprite, 50, 0)
 // Spawn player
-tiles.placeOnRandomTile(plrSprite, assets.tile`spawnTile`)
+tiles.placeOnRandomTile(plrSprite, assets.tile`playerSpawn`)
+
+// Make enemy
+let enemyBot = lbList.createCharacter(assets.image`enemyStickfigure`, "Enemy");
+let enemySprite = enemyBot.getSprite();
+tiles.placeOnRandomTile(enemySprite, assets.tile`enemySpawn`);
+enemySprite.ay = 300;
+enemyBot.followAdv(plrSprite, 50, 0);

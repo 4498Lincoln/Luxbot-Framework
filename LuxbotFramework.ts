@@ -59,13 +59,25 @@ class LBChar {
     }
     // Follow advanced
     followAdv(toFollow: Sprite, speedX: number, speedY: number) {
-        game.onUpdate(function () {
-            const botX = this.sprite.x
-            const botY = this.sprite.y
-            const tarX = toFollow.x
-            const tarY = toFollow.y
+        control.runInParallel(function() {
+            while (true) {
+                // Positions of bot and target
+                const botX = this.sprite.x;
+                const botY = this.sprite.y;
+                const tarX = toFollow.x;
+                const tarY = toFollow.y;
 
-        })
+                // Calculate desired velocity
+                const xVelNew = speedX * Math.sign(tarX - botX);
+                const yVelNew = speedY * Math.sign(tarY - botY);
+
+                // Set velocity of enemy
+                this.sprite.vx = xVelNew;
+                this.sprite.vy = yVelNew;
+
+                pause(50)
+            }
+        });
     }
 }
 
