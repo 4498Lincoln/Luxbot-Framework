@@ -28,13 +28,20 @@ namespace SpriteKind {
 
 // Luxbot class
 class LBChar {
+    // VARIABLES //
     private sprite: Sprite;
     private kind: string;
+    
+    private doFollowAdv: boolean;
+
+    ///////////////
 
     // Constructor
     constructor(img: Image, kind: string) {
         this.kind = kind;
         this.sprite = sprites.create(img, SpriteKind.LuxbotKind);
+        
+        this.doFollowAdv = false;
     }
 
     // Set image
@@ -59,8 +66,9 @@ class LBChar {
     }
     // Follow advanced
     followAdv(toFollow: Sprite, speedX: number, speedY: number) {
+        this.doFollowAdv = true;
         control.runInParallel(function() {
-            while (true) {
+            do {
                 // Positions of bot and target
                 const botX = this.sprite.x;
                 const botY = this.sprite.y;
@@ -76,8 +84,16 @@ class LBChar {
                 this.sprite.vy = yVelNew;
 
                 pause(50)
-            }
+            } while (this.doFollowAdv);
         });
+    }
+    // Cancel follow advanced
+    undoFollowAdv() {
+        this.doFollowAdv = false;
+    }
+    // Doing follow advanced
+    doingFollowAdv() {
+        return this.doFollowAdv;
     }
 }
 
