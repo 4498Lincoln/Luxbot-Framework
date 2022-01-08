@@ -1,38 +1,40 @@
 /*********************************************************************************
 
 
-      _             _      _           _
-     | | ___  _   _| | ___| |__   ___ | |_
-  _  | |/ _ \| | | | |/ _ \ '_ \ / _ \| __|
- | |_| | (_) | |_| | |  __/ |_) | (_) | |_
-  \___/ \___/ \__,_|_|\___|_.__/ \___/ \__|        _
+  _               _           _
+ | |   _   ___  _| |__   ___ | |_
+ | |  | | | \ \/ / '_ \ / _ \| __|
+ | |__| |_| |>  <| |_) | (_) | |_
+ |_____\__,_/_/\_\_.__/ \___/ \__|                 _
  |  ___| __ __ _ _ __ ___   _____      _____  _ __| | __
  | |_ | '__/ _` | '_ ` _ \ / _ \ \ /\ / / _ \| '__| |/ /
  |  _|| | | (_| | | | | | |  __/\ V  V / (_) | |  |   <
  |_|  |_|  \__,_|_| |_| |_|\___| \_/\_/ \___/|_|  |_|\_\
 
-Joulebot Framework by Jason Reiniger
 
-Joulebots are sprites created and managed as an instance
-of the JBChar class from this framework to help make
+
+Luxbot Framework by Jason Reiniger
+
+Luxbots are sprites created and managed as an instance
+of the LBChar class from this framework to help make
 developing sprites easier.
 
 *********************************************************************************/
 
-// Joulebot NPC Type
+// Luxbot NPC Type
 namespace SpriteKind {
-    export const JoulebotKind = SpriteKind.create();
+    export const LuxbotKind = SpriteKind.create();
 }
 
-// Joulebot class
-class JBChar {
+// Luxbot class
+class LBChar {
     private sprite: Sprite;
     private kind: string;
 
     // Constructor
     constructor(img: Image, kind: string) {
         this.kind = kind;
-        this.sprite = sprites.create(img, SpriteKind.JoulebotKind);
+        this.sprite = sprites.create(img, SpriteKind.LuxbotKind);
     }
 
     // Set image
@@ -72,17 +74,17 @@ class JBChar {
 
 
 // Joulebot character list class
-class JBCharList {
-    private charList: Array<JBChar>;
+class LBCharList {
+    private charList: Array<LBChar>;
 
     // Constructor
     constructor() {
         this.charList = [];
     }
 
-    // New Joulebot
+    // New Luxbot
     createCharacter(img: Image, kind: string) {
-        let newChar = new JBChar(img, kind);
+        let newChar = new LBChar(img, kind);
         this.charList.push(newChar);
         return newChar;
     }
@@ -94,7 +96,7 @@ class JBCharList {
 
     // Find characters of kind
     charactersOfKind(kindToFind: string) {
-        let returnList: Array<JBChar> = [];
+        let returnList: Array<LBChar> = [];
 
         this.charList.forEach(function(val) {
             if (val.getKind() == kindToFind) {

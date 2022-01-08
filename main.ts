@@ -8,8 +8,8 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
 scene.setBackgroundImage(assets.image`devbackground`)
 tiles.setTilemap(tilemap`level1`)
 
-let jbList = new JBCharList();
-let plrBot = jbList.createCharacter(assets.image`plrStickfigure`, "Player");
+let lbList = new LBCharList();
+let plrBot = lbList.createCharacter(assets.image`plrStickfigure`, "Player");
 let plrSprite = plrBot.getSprite();
 // Player properties
 plrSprite.ay = 300
