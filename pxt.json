@@ -1,5 +1,5 @@
 {
-    "name": "Joulebot Framework",
+    "name": "Luxbot Framework",
     "description": "",
     "dependencies": {
         "device": "*"
@@ -12,7 +12,8 @@
         "images.g.jres",
         "images.g.ts",
         "tilemap.g.jres",
-        "tilemap.g.ts"
+        "tilemap.g.ts",
+        "LuxbotFramework.ts"
     ],
     "testFiles": [
         "test.ts"

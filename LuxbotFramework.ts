@@ -59,12 +59,12 @@ class LBChar {
     }
     // Follow advanced
     followAdv(toFollow: Sprite, speedX: number, speedY: number) {
-        game.onUpdate(function() {
+        game.onUpdate(function () {
             const botX = this.sprite.x
             const botY = this.sprite.y
             const tarX = toFollow.x
             const tarY = toFollow.y
-            
+
         })
     }
 }
@@ -98,7 +98,7 @@ class LBCharList {
     charactersOfKind(kindToFind: string) {
         let returnList: Array<LBChar> = [];
 
-        this.charList.forEach(function(val) {
+        this.charList.forEach(function (val) {
             if (val.getKind() == kindToFind) {
                 returnList.push(val);
             }

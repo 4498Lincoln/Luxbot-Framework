@@ -19,4 +19,3 @@ scene.cameraFollowSprite(plrSprite)
 controller.player1.moveSprite(plrSprite, 50, 0)
 // Spawn player
 tiles.placeOnRandomTile(plrSprite, assets.tile`spawnTile`)
-
