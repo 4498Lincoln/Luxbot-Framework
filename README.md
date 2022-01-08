@@ -1,4 +1,5 @@
- 
+**PLEASE MAKE A PULL REQUEST OR OPEN UP AN ISSUE IF YOU SEE ANYTHING THAT SHOULD BE CHANGED.**
+
 Luxbot Framework is a framework designed to help people code NPCs easier. It manages NPCs with the class LBChar, which provides methods like `followAdv()`, a method that gives you finer control than `follow()`.
 
 The main.ts file is simply for a demonstration of Luxbot Framework. Applying Luxbot Framework to a game would require clearing the main.ts file of Luxbot Framework first.
