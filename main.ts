@@ -4,7 +4,7 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         plrSprite.vy = -100
     }
 })
-// Set the scene
+// Set the 
 scene.setBackgroundImage(assets.image`devbackground`)
 tiles.setTilemap(tilemap`level1`)
 
