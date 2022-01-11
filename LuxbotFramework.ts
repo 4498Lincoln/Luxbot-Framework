@@ -21,8 +21,6 @@ developing sprites easier.
 
 *********************************************************************************/
 
-console.log("Hello world!")
-
 // Luxbot NPC Type
 namespace SpriteKind {
     export const LuxbotKind = SpriteKind.create()
