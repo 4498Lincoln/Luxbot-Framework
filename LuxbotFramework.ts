@@ -31,7 +31,13 @@ class LBChar {
     // VARIABLES //
     private sprite: Sprite
     private kind: string
-    
+    private oldPosX: number
+    private oldPosY: number
+    private curPosX: number
+    private curPosY: number
+    private posRecordInterval: number
+    private posRecordJumpUse: boolean
+
     private doFollowAdv: boolean
 
     ///////////////
@@ -40,8 +46,39 @@ class LBChar {
     constructor(img: Image, kind: string) {
         this.kind = kind
         this.sprite = sprites.create(img, SpriteKind.LuxbotKind)
-        
+
         this.doFollowAdv = false
+
+        this.oldPosX = this.sprite.x
+        this.oldPosY = this.sprite.y
+        this.curPosX = this.sprite.x
+        this.curPosY = this.sprite.y
+        this.posRecordInterval = 1000
+        this.posRecordJumpUse = false
+
+        control.runInParallel(function() {
+            do {
+                this.oldPosX = this.curPosX
+                this.oldPosY = this.curPosY
+                this.curPosX = this.sprite.x
+                this.curPosY = this.sprite.y
+                console.log(
+                    this.oldPosX + " " + this.oldPosY + ", " +
+                    this.curPosX + " " + this.curPosY
+                )
+                this.posRecordJumpUse = false
+                pause(this.posRecordInterval)
+            } while (true)
+        })
+    }
+
+    // Set position record interval
+    setPosRecordInterval(newInterval: number) {
+        this.posRecordInterval = newInterval
+    }
+    // Get position record interval
+    getPosRecordInterval() {
+        return this.posRecordInterval
     }
 
     // Set image
@@ -65,7 +102,18 @@ class LBChar {
         return this.sprite
     }
     // Follow advanced
-    followAdv(params: {target: Sprite, speedX: number, speedY: number, jumpVel: number}) {
+    followAdv(params: {
+            target: Sprite,
+            interval: number,
+            speedX: number,
+            speedY: number,
+            jump: {
+                doJump: boolean,
+                jumpVel: number,
+                jumpStationary: boolean,
+                jumpWall: boolean
+            }
+    }) {
         this.doFollowAdv = true
         control.runInParallel(function() {
             do {
@@ -84,16 +132,29 @@ class LBChar {
                 if (params.speedY != 0) this.sprite.vy = yVelNew
 
                 // Jump
-                if (this.sprite.isHittingTile(CollisionDirection.Left) || this.sprite.isHittingTile(CollisionDirection.Right)) {
-                    console.log("Touching left/right wall")
-                    if (this.sprite.isHittingTile(CollisionDirection.Bottom)) {
-                        console.log("Touching bottom wall")
-                        console.log(params.jumpVel)
-                        this.sprite.vy = params.jumpVel
+                if (params.jump.doJump) {
+                    let jumped = false
+
+                    // Jump on touched wall
+                    if (!jumped) if (params.jump.jumpWall) {
+                        if (this.sprite.isHittingTile(CollisionDirection.Left) || this.sprite.isHittingTile(CollisionDirection.Right)) {
+                            if (this.sprite.isHittingTile(CollisionDirection.Bottom)) {
+                                this.sprite.vy = params.jump.jumpVel
+                                jumped = true
+                            }
+                        }
+                    }
+                    // Jump on velocity zero
+                    if (!jumped) if (params.jump.jumpStationary && !this.posRecordJumpUse) {
+                        if ((this.curPosX - this.oldPosX) == 0) {
+                            this.sprite.vy = params.jump.jumpVel
+                            this.posRecordJumpUse = true
+                            jumped = true
+                        }
                     }
                 }
 
-                pause(50)
+                pause(params.interval)
             } while (this.doFollowAdv)
         })
     }
