@@ -13,7 +13,7 @@
 
 
 
-Luxbot Framework by Jason Reiniger
+Luxbot Framework by 4498Lincoln and JR-465856
 
 Luxbots are sprites created and managed as an instance
 of the LBChar class from this framework to help make
